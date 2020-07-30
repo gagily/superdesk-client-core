@@ -2,6 +2,10 @@
     <section class="main-section" ng-class="monitoring.state">
         <div class="preview-layout monitoring-preview-layout" sd-media-query min-width="700" element-class="narrowList">
             <div class="content-list monitoring__content" ng-if="!aggregate.loading">
+
+
+                <sd-subnav-react />
+
                 <div class="monitoring__toolbar-container">
                     <div class="subnav" ng-if="hideMonitoringToolbar1 !== true">
                         <div class="flat-searchbar monitoring-backlink" ng-if="monitoring.singleGroup">
