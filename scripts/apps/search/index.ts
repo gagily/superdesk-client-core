@@ -2,15 +2,18 @@ import './styles/search.scss';
 
 import * as svc from './services';
 import * as directive from './directives';
-import {MultiActionBarController} from './controllers';
-import {SearchController} from './controllers';
+import { MultiActionBarController } from './controllers';
+import { SearchController } from './controllers';
 import SearchMenuController from './controllers/SearchMenuController';
-import {MultiImageEditDirective} from './MultiImageEdit';
-import {gettext} from 'core/utils';
-import {MultiActionBarReact} from 'apps/monitoring/MultiActionBarReact';
-import {reactToAngular1} from 'superdesk-ui-framework';
-import {SearchPanelWidgets} from './components/search-panel-widgets';
-import {PreviewSubject} from './components/preview-subject';
+import { MultiImageEditDirective } from './MultiImageEdit';
+import { gettext } from 'core/utils';
+
+import { MultiActionBarReact } from 'apps/monitoring/MultiActionBarReact';
+import { SubNavReact } from 'apps/monitoring/SubNavReact';
+
+import { reactToAngular1 } from 'superdesk-ui-framework';
+import { SearchPanelWidgets } from './components/search-panel-widgets';
+import { PreviewSubject } from './components/preview-subject';
 
 angular.module('superdesk.apps.search.react', [
     'superdesk.apps.highlights',
@@ -39,7 +42,7 @@ angular.module('superdesk.apps.search', [
     'superdesk.apps.search.react',
     'superdesk.apps.workspace.menu',
 ])
-    .value('searchCommon', {meta: {}})
+    .value('searchCommon', { meta: {} })
     .service('search', svc.SearchService)
     .service('savedSearch', svc.SavedSearchService)
     .service('multiImageEdit', svc.MultiImageEditService)
@@ -77,6 +80,14 @@ angular.module('superdesk.apps.search', [
     )
 
     .component(
+        'sdSubnavReact',
+        reactToAngular1(
+            SubNavReact,
+            [], []
+        ),
+    )
+
+    .component(
         'searchPanelWidgets',
         reactToAngular1(
             SearchPanelWidgets,
@@ -106,7 +117,7 @@ angular.module('superdesk.apps.search', [
                 sideTemplateUrl: 'scripts/apps/workspace/views/workspace-sidenav.html',
                 controller: SearchController,
                 controllerAs: 'search',
-                privileges: {use_global_saved_searches: 1},
+                privileges: { use_global_saved_searches: 1 },
             });
 
             workspaceMenuProvider.item({
@@ -120,7 +131,7 @@ angular.module('superdesk.apps.search', [
         },
     ])
 
-    .run(['keyboardManager', function(keyboardManager) {
+    .run(['keyboardManager', function (keyboardManager) {
         keyboardManager.register('Search', 'ctrl + 0', gettext('Show search modal'));
         keyboardManager.register('Search', 'v', gettext('Toggle search view'));
     }]);
